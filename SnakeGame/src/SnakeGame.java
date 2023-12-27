@@ -61,6 +61,16 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	
+	  public void restartGame() {
+	        snakeHead = new Tile(5, 5);
+	        snakebody.clear();
+	        placeFood();
+	        velocityX = -1;
+	        velocityY = 0;
+	        gameOver = false;
+	        gameLoop.start();
+	    }
+	
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);;
@@ -97,7 +107,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 		//Score
 		g.setFont(new Font("Arial", Font.PLAIN, 16));
 		if(gameOver) {
-			g.drawString("Game Over! Your score: " + String.valueOf(snakebody.size()), tileSize - 16, tileSize);
+			g.drawString("Game Over!    To restart press F5     Your score: " + String.valueOf(snakebody.size()), tileSize - 16, tileSize);
 		}
 		else {
 			g.drawString("Score: " + String.valueOf(snakebody.size()), tileSize - 16, tileSize);
@@ -190,7 +200,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 	} else if(e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
 		velocityX = 1;
 		velocityY = 0;
-	}
+	} else if (e.getKeyCode() == KeyEvent.VK_F5) {
+        // Reinicia o jogo quando a tecla F5 é pressionada
+        restartGame();
+    }
 		
 	}
 
